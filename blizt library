@@ -1141,24 +1141,24 @@ function OrionLib:MakeWindow(WindowConfig)
 					Size = UDim2.new(1, 0, 1, 0)
 				})
 
-				local ToggleBox = SetChildren(SetProps(MakeElement("RoundFrame", ToggleConfig.Color, 0, 4), {
-					Size = UDim2.new(0, 24, 0, 24),
-					Position = UDim2.new(1, -24, 0.5, 0),
-					AnchorPoint = Vector2.new(0.5, 0.5)
-				}), {
-					SetProps(MakeElement("Stroke"), {
-						Color = ToggleConfig.Color,
-						Name = "Stroke",
-						Transparency = 0.5
-					}),
-					SetProps(MakeElement("Image", "rbxassetid://3944680095"), {
-						Size = UDim2.new(0, 20, 0, 20),
-						AnchorPoint = Vector2.new(0.5, 0.5),
-						Position = UDim2.new(0.5, 0, 0.5, 0),
-						ImageColor3 = Color3.fromRGB(255, 255, 255),
-						Name = "Ico"
-					}),
-				})
+				local ToggleBox = SetChildren(SetProps(MakeElement("RoundFrame", Color3.new(1,1,1), 0, 4), { -- Белый фон
+				        Size = UDim2.new(0, 24, 0, 24),
+				        Position = UDim2.new(1, -24, 0.5, 0),
+				        AnchorPoint = Vector2.new(0.5, 0.5)
+				    }), {
+				        SetProps(MakeElement("Stroke"), {
+				            Color = Color3.new(0,0,0), -- Черная граница
+				            Name = "Stroke",
+				            Transparency = 0
+				        }),
+				        SetProps(MakeElement("Image", "rbxassetid://3944680095"), {
+				            Size = UDim2.new(0, 20, 0, 20),
+				            AnchorPoint = Vector2.new(0.5, 0.5),
+				            Position = UDim2.new(0.5, 0, 0.5, 0),
+				            ImageColor3 = Color3.new(0,0,0), -- Черная галочка
+				            Name = "Ico"
+				        }),
+				    })
 
 				local ToggleFrame = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 5), {
 					Size = UDim2.new(1, 0, 0, 38),
@@ -1176,12 +1176,14 @@ function OrionLib:MakeWindow(WindowConfig)
 				}), "Second")
 
 				function Toggle:Set(Value)
-					Toggle.Value = Value
-					TweenService:Create(ToggleBox, TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Toggle.Value and ToggleConfig.Color or OrionLib.Themes.Default.Divider}):Play()
-					TweenService:Create(ToggleBox.Stroke, TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Color = Toggle.Value and ToggleConfig.Color or OrionLib.Themes.Default.Stroke}):Play()
-					TweenService:Create(ToggleBox.Ico, TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {ImageTransparency = Toggle.Value and 0 or 1, Size = Toggle.Value and UDim2.new(0, 20, 0, 20) or UDim2.new(0, 8, 0, 8)}):Play()
-					ToggleConfig.Callback(Toggle.Value)
-				end    
+				        self.Value = Value
+				        -- Изменено: всегда белый фон, черная граница, меняется только видимость галочки
+				        TweenService:Create(ToggleBox.Ico, TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
+				            ImageTransparency = Toggle.Value and 0 or 1,
+				            Size = Toggle.Value and UDim2.new(0, 20, 0, 20) or UDim2.new(0, 8, 0, 8)
+				        }):Play()
+				        ToggleConfig.Callback(self.Value)
+				    end   
 
 				Toggle:Set(Toggle.Value)
 
@@ -1239,14 +1241,15 @@ function OrionLib:MakeWindow(WindowConfig)
 					}), "Text")
 				})
 
-				local SliderBar = SetChildren(SetProps(MakeElement("RoundFrame", SliderConfig.Color, 0, 5), {
-					Size = UDim2.new(1, -24, 0, 26),
-					Position = UDim2.new(0, 12, 0, 30),
-					BackgroundTransparency = 0.9
-				}), {
-					SetProps(MakeElement("Stroke"), {
-						Color = SliderConfig.Color
-					}),
+				local SliderBar = SetChildren(SetProps(MakeElement("RoundFrame", Color3.new(0.9,0.9,0.9), 0, 5), { -- Светло-серый фон
+				        Size = UDim2.new(1, -24, 0, 26),
+				        Position = UDim2.new(0, 12, 0, 30),
+				        BackgroundTransparency = 0.5
+				    }), {
+				        SetProps(MakeElement("Stroke"), {
+				            Color = Color3.new(0,0,0), -- Черная граница
+				            Thickness = 1.5
+				        }),
 					AddThemeObject(SetProps(MakeElement("Label", "value", 13), {
 						Size = UDim2.new(1, -12, 0, 14),
 						Position = UDim2.new(0, 12, 0, 6),
