@@ -445,48 +445,48 @@ local NotificationHolder = SetProps(SetChildren(MakeElement("TFrame"), {
 })
 
 function OrionLib:MakeNotification(NotificationConfig)
-    spawn(function()
-        NotificationConfig.Name = NotificationConfig.Name or "Notification"
-        NotificationConfig.Content = NotificationConfig.Content or "Test"
-        NotificationConfig.Image = NotificationConfig.Image or "rbxassetid://4384403532"
-        NotificationConfig.Time = NotificationConfig.Time or 15
+	spawn(function()
+		NotificationConfig.Name = NotificationConfig.Name or "Notification"
+		NotificationConfig.Content = NotificationConfig.Content or "Test"
+		NotificationConfig.Image = NotificationConfig.Image or "rbxassetid://4384403532"
+		NotificationConfig.Time = NotificationConfig.Time or 15
 
-        local NotificationParent = SetProps(MakeElement("TFrame"), {
-            Size = UDim2.new(1, 0, 0, 0),
-            AutomaticSize = Enum.AutomaticSize.Y,
-            Parent = NotificationHolder
-        })
+		local NotificationParent = SetProps(MakeElement("TFrame"), {
+			Size = UDim2.new(1, 0, 0, 0),
+			AutomaticSize = Enum.AutomaticSize.Y,
+			Parent = NotificationHolder
+		})
 
-        local NotificationFrame = SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 10), {
-            Parent = NotificationParent, 
-            Size = UDim2.new(1, 0, 0, 0),
-            Position = UDim2.new(1, -55, 0, 0),
-            BackgroundTransparency = 0,
-            AutomaticSize = Enum.AutomaticSize.Y
-        }), {
-            MakeElement("Stroke", Color3.fromRGB(0, 0, 0), 1.2),
-            MakeElement("Padding", 12, 12, 12, 12),
-            SetProps(MakeElement("Image", NotificationConfig.Image), {
-                Size = UDim2.new(0, 20, 0, 20),
-                ImageColor3 = Color3.fromRGB(0, 0, 0),
-                Name = "Icon"
-            }),
-            SetProps(MakeElement("Label", NotificationConfig.Name, 15), {
-                Size = UDim2.new(1, -30, 0, 20),
-                Position = UDim2.new(0, 30, 0, 0),
-                Font = Enum.Font.GothamBold,
-                TextColor3 = Color3.fromRGB(0, 0, 0),
-                Name = "Title"
-            }),
-            SetProps(MakeElement("Label", NotificationConfig.Content, 14), {
-                Size = UDim2.new(1, 0, 0, 0),
-                Position = UDim2.new(0, 0, 0, 25),
-                Font = Enum.Font.GothamSemibold,
-                Name = "Content",
-                TextColor3 = Color3.fromRGB(0, 0, 0),
-                TextWrapped = true
-            })
-        })
+		local NotificationFrame = SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(25, 25, 25), 0, 10), {
+			Parent = NotificationParent, 
+			Size = UDim2.new(1, 0, 0, 0),
+			Position = UDim2.new(1, -55, 0, 0),
+			BackgroundTransparency = 0,
+			AutomaticSize = Enum.AutomaticSize.Y
+		}), {
+			MakeElement("Stroke", Color3.fromRGB(93, 93, 93), 1.2),
+			MakeElement("Padding", 12, 12, 12, 12),
+			SetProps(MakeElement("Image", NotificationConfig.Image), {
+				Size = UDim2.new(0, 20, 0, 20),
+				ImageColor3 = Color3.fromRGB(240, 240, 240),
+				Name = "Icon"
+			}),
+			SetProps(MakeElement("Label", NotificationConfig.Name, 15), {
+				Size = UDim2.new(1, -30, 0, 20),
+				Position = UDim2.new(0, 30, 0, 0),
+				Font = Enum.Font.GothamBold,
+				Name = "Title"
+			}),
+			SetProps(MakeElement("Label", NotificationConfig.Content, 14), {
+				Size = UDim2.new(1, 0, 0, 0),
+				Position = UDim2.new(0, 0, 0, 25),
+				Font = Enum.Font.GothamSemibold,
+				Name = "Content",
+				AutomaticSize = Enum.AutomaticSize.Y,
+				TextColor3 = Color3.fromRGB(200, 200, 200),
+				TextWrapped = true
+			})
+		})
 
 		TweenService:Create(NotificationFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Position = UDim2.new(0, 0, 0, 0)}):Play()
 
@@ -1247,7 +1247,7 @@ function OrionLib:MakeWindow(WindowConfig)
 				        BackgroundTransparency = 0.5
 				    }), {
 				        SetProps(MakeElement("Stroke"), {
-				            Color = Color3.new(0,0,0),
+				            Color = Color3.new(0,0,0), 
 				            Thickness = 1
 				        }),
 					AddThemeObject(SetProps(MakeElement("Label", "value", 13), {
